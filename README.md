@@ -21,9 +21,9 @@
  - `sudo su` goes into sudo(admin) mode
  - `systemctl status` 
  - `systemctl stop` 
- - `systemctl stop` 
-   history
- 
+ - `history`
+- `chmod +x filename.sh` makes file runnable
+- `./filename.sh` runs executable file 
 
 ## Setting up vagrant file
 - Inside directory, create file called Vagrantfile with contents:
