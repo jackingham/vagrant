@@ -59,3 +59,38 @@ Vagrant.configure("2") do |config|
 - `vagrant destroy` stops the VM and destroys config
 - `vagrant suspend` stops the VM but keeps config
 
+##Setting up provision.sh
+- adding the line `config.vm.synced_folder "app", "/home/vagrant/app"` to the Vagrantfile allows the app folder to be accessed in the VM as well as host machine
+- The app can be run by installing all dependancies but it is better to put these inside the provision.sh file.
+ ```#!/bin/bash
+sudo apt-get update -y
+
+sudo apt-get upgrade -y
+
+sudo  apt-get install nginx -y
+
+sudo systemctl enable nginx
+
+sudo apt-get install nodejs -y
+
+sudo apt-get install npm-y
+
+sudo apt-get install python-software-properties
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash
+
+sudo apt-get install nodejs -y
+
+sudo npm install pm2 -g
+
+npm install
+
+cd app ```
+- this fetches all the relevant dependancies and installs them
+- we can make this file run when the VM boots by adding `config.vm.provision "shell", path: "app/provision.sh"` to the Vagrantfile
+- the app can then be run by `cd`ing into app then using `sudo npm start` or `node app.js` (I omit these from the provision as they lock the command line)
+
+
+
+
+
