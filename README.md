@@ -15,9 +15,9 @@
 - Delete a file 'rm filename'
 - Update VM 'sudo apt-get update -y' sudo runs with perms, apt-get is an install manager, -y flag accepts all permissions. 
 - Install a program 'sudo apt-get install {program}' 
-- `top`
+- `top` shows processes
 - `clear` clears the screen
- - `ps`
+ - `ps` shows processes
  - `sudo su` goes into sudo(admin) mode
  - `systemctl status` 
  - `systemctl stop` 
