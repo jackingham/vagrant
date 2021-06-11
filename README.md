@@ -62,7 +62,8 @@ Vagrant.configure("2") do |config|
 ##Setting up provision.sh
 - adding the line `config.vm.synced_folder "app", "/home/vagrant/app"` to the Vagrantfile allows the app folder to be accessed in the VM as well as host machine
 - The app can be run by installing all dependancies but it is better to put these inside the provision.sh file.
- ```#!/bin/bash
+ ```
+ #!/bin/bash
 sudo apt-get update -y
 
 sudo apt-get upgrade -y
@@ -85,7 +86,8 @@ sudo npm install pm2 -g
 
 npm install
 
-cd app ```
+cd app 
+```
 - this fetches all the relevant dependancies and installs them
 - we can make this file run when the VM boots by adding `config.vm.provision "shell", path: "app/provision.sh"` to the Vagrantfile
 - the app can then be run by `cd`ing into app then using `sudo npm start` or `node app.js` (I omit these from the provision as they lock the command line)
