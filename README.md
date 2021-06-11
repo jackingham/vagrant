@@ -89,8 +89,29 @@ cd app ```
 - this fetches all the relevant dependancies and installs them
 - we can make this file run when the VM boots by adding `config.vm.provision "shell", path: "app/provision.sh"` to the Vagrantfile
 - the app can then be run by `cd`ing into app then using `sudo npm start` or `node app.js` (I omit these from the provision as they lock the command line)
+- The website is viewable at 192.168.10.100:3000
 
+## Reverse proxy
 
+- A reverse proxy allows the port number to be omitted when accessing the app through a browser.
+- This can be set up by `cd`ing into the `/etc/nginx/sites-available` and `sudo nano default` and replacing the file with the following:
+```
+server {
+	listen 80;
 
+	server_name _;
+
+	location / {
+		proxy_pass http://192.168.10.100:3000;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection 'upgrade';
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
+}
+```
+- Its best to now stop nginx and reboot the machine before rehosting the app with `node app.js` 
+- The website should be visible with 192.168.10.100 without the port number.
 
 
